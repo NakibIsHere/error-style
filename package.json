@@ -1,0 +1,37 @@
+{
+  "name": "error-style",
+  "version": "1.0.0",
+  "description": "Transform technical error messages into human-friendly explanations for better debugging",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "node --test",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "error",
+    "debugging",
+    "human-friendly",
+    "beginner-friendly",
+    "error-messages",
+    "pretty-errors"
+  ],
+  "author": "slammers001",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ]
+}
