@@ -6,13 +6,16 @@ Transform technical error messages into human-friendly explanations for better d
 
 Technical error messages are confusing:
 
-❌ `Cannot read properties of undefined`
+```
+❌ Cannot read properties of undefined
+```
 
 ## ✨ The Solution
 
 Clear, human-friendly explanations:
 
-❌ `Cannot read properties of undefined`
+```
+❌ Cannot read properties of undefined
 
 **Reason:**
 You tried to use something before it existed.
@@ -24,7 +27,7 @@ Check if the value exists first using optional chaining (?.) or if statements.
 • Try: `value?.property` instead of `value.property`
 • Add: `if (value) { /* your code */ }`
 • Initialize the variable before using it
-
+```
 ## 🚀 Usage
 
 ### Basic Usage
@@ -38,9 +41,9 @@ prettyTry(() => {
 ```
 
 Instead of crashing, you get:
-- `success: false`
-- Clear explanation of what went wrong
-- Actionable fix suggestions
+- `success: false` (sounds much nicer, huh? 😜)
+- Clear explanation of what went wrong (finally! now you can fix your project's errors from 4 years ago!)
+- Actionable fix suggestions (that are not from Webster's Dictionary. You can understand them 🙄)
 
 ### Async Usage
 
@@ -86,14 +89,15 @@ prettyTry(() => {
 ```
 
 **Output:**
-❌ `Cannot read properties of undefined`
+```
+❌ Cannot read properties of undefined
 
 **Reason:**
 You tried to use something before it existed.
 
 **Fix:**
 Check if the value exists first using optional chaining (?.) or if statements.
-
+```
 ### JSON Parsing Error
 
 ```javascript
@@ -104,7 +108,8 @@ await prettyTryAsync(async () => {
 ```
 
 **Output:**
-❌ `Unexpected token`
+```
+❌ Unexpected token
 
 **Reason:**
 Failed to parse JSON - the response isn't valid JSON.
@@ -116,7 +121,7 @@ The API probably returned HTML or an error message instead of JSON.
 • Check `response.status` before parsing
 • Log the raw response: `console.log(await response.text())`
 • Verify the API endpoint is correct
-
+```
 ### Network Error
 
 ```javascript
@@ -127,14 +132,15 @@ await prettyTryAsync(async () => {
 ```
 
 **Output:**
-❌ `Failed to fetch`
+```
+❌ Failed to fetch
 
 **Reason:**
 Network request failed - can't reach the server.
 
 **Fix:**
 Check your internet connection and the API URL.
-
+```
 ## 🧩 Supported Errors
 
 - **Undefined/Null errors** - Property access on undefined/null
@@ -152,7 +158,7 @@ Check your internet connection and the API URL.
 - **API builders** - Handle network and parsing errors gracefully
 - **Students** - Learn programming without frustration
 - **Hobby developers** - Build without getting stuck
-- **Pros debugging fast** - Get instant clarity on common issues
+- **Pros debugging fast** - Get instant clarity on common issues that you forget how to fix at 3 in the morning. Your welcome.
 
 ## 📦 Installation
 
@@ -162,7 +168,7 @@ npm install error-style
 
 ## 🔧 API Reference
 
-### `prettyTry<T>(fn: () => T): PrettyTryResult<T>`
+#### `prettyTry<T>(fn: () => T): PrettyTryResult<T>`
 
 Wraps a synchronous function and provides friendly error messages.
 
@@ -194,4 +200,4 @@ Open an issue or submit a PR!
 
 ## 📄 License
 
-MIT
+MIT - slammers001
