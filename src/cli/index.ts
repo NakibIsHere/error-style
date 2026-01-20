@@ -45,10 +45,11 @@ function main() {
   
   console.log('🚀 error-style CLI Demo\n');
   
-  // Test error
+  // Test 1: Undefined property error
+  console.log('--- Test 1: Undefined property ---');
   try {
-    const obj: any = undefined;
-    obj.map((x: any) => x);
+    const users: any = undefined;
+    users.map((u: any) => u.name);
   } catch (error) {
     if (args.regular) {
       console.log('\n📄 Regular Error Message:');
@@ -59,10 +60,58 @@ function main() {
     }
   }
   
+  // Test 2: JSON parsing error
+  console.log('\n--- Test 2: JSON parsing error ---');
+  try {
+    JSON.parse('<html>Error page</html>');
+  } catch (error) {
+    if (args.regular) {
+      console.log(error instanceof Error ? error.message : String(error));
+    } else {
+      console.log(prettyError(error instanceof Error ? error : new Error(String(error))));
+    }
+  }
+  
+  // Test 3: Map not a function
+  console.log('\n--- Test 3: Map not a function ---');
+  try {
+    const data: any = 'not an array';
+    data.map((item: any) => item);
+  } catch (error) {
+    if (args.regular) {
+      console.log(error instanceof Error ? error.message : String(error));
+    } else {
+      console.log(prettyError(error instanceof Error ? error : new Error(String(error))));
+    }
+  }
+  
+  // Test 4: React error
+  console.log('\n--- Test 4: React error ---');
+  try {
+    throw new Error('Objects are not valid as a React child');
+  } catch (error) {
+    if (args.regular) {
+      console.log(error instanceof Error ? error.message : String(error));
+    } else {
+      console.log(prettyError(error instanceof Error ? error : new Error(String(error)), { framework: 'react' }));
+    }
+  }
+  
+  // Test 5: Unknown error
+  console.log('\n--- Test 5: Unknown error ---');
+  try {
+    const obj: any = undefined;
+    obj.someProperty.someMethod();
+  } catch (error) {
+    if (args.regular) {
+      console.log(error instanceof Error ? error.message : String(error));
+    } else {
+      console.log(prettyError(error instanceof Error ? error : new Error(String(error))));
+    }
+  }
+  
   console.log(`\n📈 Total errors processed: ${getErrorCount()}`);
 }
 
-// Check if this file is being run directly
-if (import.meta.url === `file://${process.argv[1]}`) {
-  main();
-}
+// Always run main function for CLI
+main();

@@ -168,7 +168,9 @@ npm install error-style
 
 ## 🔧 API Reference
 
-#### `prettyTry<T>(fn: () => T): PrettyTryResult<T>`
+```typescript
+prettyTry<T>(fn: () => T): PrettyTryResult<T>
+```
 
 Wraps a synchronous function and provides friendly error messages.
 
@@ -181,15 +183,21 @@ Wraps a synchronous function and provides friendly error messages.
 }
 ```
 
-### `prettyTryAsync<T>(fn: () => Promise<T>): Promise<PrettyTryResult<T>>`
+```typescript
+prettyTryAsync<T>(fn: () => Promise<T>): Promise<PrettyTryResult<T>>
+```
 
 Same as `prettyTry` but for async functions.
 
-### `formatError(error: ErrorExplanation): string`
+```typescript
+formatError(error: ErrorExplanation): string
+```
 
 Formats an error explanation into a readable string.
 
-### `logError(error: ErrorExplanation): void`
+```typescript
+logError(error: ErrorExplanation): void
+```
 
 Logs a formatted error to console.error.
 
