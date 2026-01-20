@@ -65,8 +65,22 @@ export class PrettyFormatter {
     
     // Show what to look at
     output += `\n${colors.brightYellow}👀 LOOK AT:${colors.reset}\n`;
-    output += `${colors.yellow}  • Line number in error${colors.reset}\n`;
-    output += `${colors.yellow}  • Variable values${colors.reset}\n`;
+    
+    // Extract actual file and line from stack trace
+    const stackInfo = this.extractStackInfo(error.stack);
+    if (stackInfo.file) {
+      output += `${colors.yellow}  • File: ${stackInfo.file}${colors.reset}\n`;
+    }
+    if (stackInfo.line) {
+      output += `${colors.yellow}  • Line: ${stackInfo.line}${colors.reset}\n`;
+    }
+    
+    // Extract variable name from error message
+    const variableName = this.extractVariableName(error.message);
+    if (variableName) {
+      output += `${colors.yellow}  • Variable: "${variableName}"${colors.reset}\n`;
+    }
+    
     if (context?.framework) {
       output += `${colors.yellow}  • ${context.framework} docs${colors.reset}\n`;
     }
@@ -172,6 +186,54 @@ export class PrettyFormatter {
     }
     
     return lines.length > 0 ? lines : [indent + text];
+  }
+
+  /**
+   * Extract file and line info from stack trace
+   */
+  private extractStackInfo(stack?: string): { file?: string; line?: string } {
+    if (!stack) return {};
+    
+    const lines = stack.split('\n');
+    for (const line of lines) {
+      // Match file:// paths without parentheses (ES modules)
+      const fileMatch = line.match(/at .+ \(file:\/\/(.+):(\d+):(\d+)\)/);
+      if (fileMatch) {
+        return { file: fileMatch[1], line: fileMatch[2] };
+      }
+      
+      // Match file:// paths without parentheses
+      const directFileMatch = line.match(/at file:\/\/(.+):(\d+):(\d+)/);
+      if (directFileMatch) {
+        return { file: directFileMatch[1], line: directFileMatch[2] };
+      }
+      
+      // Match regular file paths with parentheses
+      const pathMatch = line.match(/at .+ \(([^)]+):(\d+):(\d+)\)/);
+      if (pathMatch) {
+        const file = pathMatch[1];
+        // Skip node internal files
+        if (!file.includes('node:') && !file.includes('internal/')) {
+          return { file, line: pathMatch[2] };
+        }
+      }
+    }
+    return {};
+  }
+
+  /**
+   * Extract variable name from error message
+   */
+  private extractVariableName(message: string): string | null {
+    // Match patterns like "Cannot read properties of undefined (reading 'map')"
+    const match = message.match(/Cannot read properties of (undefined|null) \(reading '([^']+)'\)/);
+    if (match) return match[1];
+    
+    // Match patterns like "map is not a function"
+    const funcMatch = message.match(/(\w+) is not a function/);
+    if (funcMatch) return funcMatch[1];
+    
+    return null;
   }
 
   /**
