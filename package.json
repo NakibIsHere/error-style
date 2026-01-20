@@ -1,6 +1,6 @@
 {
   "name": "error-style",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Transform technical error messages into human-friendly explanations for better debugging",
   "bin": {
     "error-style": "./dist/cli/index.js"
@@ -28,6 +28,10 @@
   ],
   "author": "slammers001",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/slammers001/error-style.git"
+  },
   "devDependencies": {
     "typescript": "^5.0.0",
     "@types/node": "^20.0.0"
