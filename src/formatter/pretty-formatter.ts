@@ -44,65 +44,32 @@ export class PrettyFormatter {
   private formatKnownError(error: Error, ruleMatch: RuleMatch, context?: ErrorContext): string {
     const { rule } = ruleMatch;
     const colors = this.getColors();
-    const maxWidth = this.options.maxWidth || 60;
     
     let output = '';
     
-    // Header with severity indicator
+    // Header with severity icon
     const severityIcon = this.getSeverityIcon(rule.severity);
     output += `\n${colors.brightRed}${severityIcon} ${rule.title.toUpperCase()}${colors.reset}\n`;
-    output += `${colors.brightRed}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${colors.reset}\n`;
+    output += `${colors.brightRed}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${colors.reset}\n`;
     
-    // Error message
-    output += `${colors.brightWhite}${this.wrapText(error.message, '', maxWidth).join('\n')}${colors.reset}\n\n`;
+    // Quick explanation
+    output += `${colors.cyan}${rule.explanation}${colors.reset}\n\n`;
     
-    // Explanation
-    output += `${colors.brightBlue}🧠  WHAT HAPPENED${colors.reset}\n`;
-    output += `${colors.cyan}${this.wrapText(rule.explanation, '', maxWidth).join('\n')}${colors.reset}\n\n`;
-    
-    // Fixes
-    output += `${colors.brightGreen}🔧  HOW TO FIX${colors.reset}\n`;
-    rule.fixes.forEach((fix, index) => {
-      const bullet = index === rule.fixes.length - 1 ? '└──' : '├──';
-      const fixLines = this.wrapText(fix, '    ', maxWidth);
-      fixLines[0] = `  ${bullet} ${fixLines[0].trim()}`;
-      output += `${colors.white}${fixLines.join('\n')}${colors.reset}\n`;
+    // Quick fixes (max 3)
+    output += `${colors.brightGreen}🔧 QUICK FIX:${colors.reset}\n`;
+    const fixesToShow = rule.fixes.slice(0, 3);
+    fixesToShow.forEach((fix, index) => {
+      const bullet = index === fixesToShow.length - 1 ? '└──' : '├──';
+      output += `${colors.white}  ${bullet} ${fix}${colors.reset}\n`;
     });
     
-    // Examples (if enabled)
-    if (this.options.showExamples && rule.examples) {
-      output += `\n${colors.brightMagenta}💡  EXAMPLES${colors.reset}\n`;
-      rule.examples.forEach(example => {
-        output += `${colors.yellow}  • ${example}${colors.reset}\n`;
-      });
+    // Show what to look at
+    output += `\n${colors.brightYellow}👀 LOOK AT:${colors.reset}\n`;
+    output += `${colors.yellow}  • Line number in error${colors.reset}\n`;
+    output += `${colors.yellow}  • Variable values${colors.reset}\n`;
+    if (context?.framework) {
+      output += `${colors.yellow}  • ${context.framework} docs${colors.reset}\n`;
     }
-    
-    // Context information
-    if (this.options.showContext && context) {
-      output += `\n${colors.brightCyan}📍  CONTEXT${colors.reset}\n`;
-      if (context.framework) output += `${colors.cyan}  Framework: ${context.framework}${colors.reset}\n`;
-      if (context.environment) output += `${colors.cyan}  Environment: ${context.environment}${colors.reset}\n`;
-      if (context.line) output += `${colors.cyan}  Line: ${context.line}${colors.reset}\n`;
-    }
-    
-    // Severity and confidence
-    if (this.options.showSeverity) {
-      output += `\n${colors.dim}  Severity: ${rule.severity || 'unknown'} | Confidence: ${Math.round(ruleMatch.confidence * 100)}%${colors.reset}\n`;
-    }
-    
-    // Original error (if enabled)
-    if (this.options.showOriginalError) {
-      output += `\n${colors.brightRed}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${colors.reset}\n`;
-      output += `${colors.dim}ORIGINAL ERROR:${colors.reset}\n`;
-      output += `${colors.white}${error.name}: ${error.message}${colors.reset}\n`;
-      
-      if (this.options.showStack && error.stack) {
-        output += `\n${colors.dim}STACK TRACE:${colors.reset}\n`;
-        output += `${colors.dim}${this.formatStack(error.stack, maxWidth)}${colors.reset}\n`;
-      }
-    }
-    
-    output += `${colors.brightRed}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${colors.reset}\n`;
     
     return output;
   }
@@ -112,38 +79,21 @@ export class PrettyFormatter {
    */
   private formatUnknownError(error: Error, context?: ErrorContext): string {
     const colors = this.getColors();
-    const maxWidth = this.options.maxWidth || 60;
     
     let output = '';
     
     output += `\n${colors.brightRed}❌ UNKNOWN ERROR${colors.reset}\n`;
-    output += `${colors.brightRed}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${colors.reset}\n`;
+    output += `${colors.brightRed}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${colors.reset}\n`;
     
-    output += `${colors.brightWhite}${this.wrapText(error.message, '', maxWidth).join('\n')}${colors.reset}\n\n`;
+    output += `${colors.brightWhite}${error.message}${colors.reset}\n\n`;
     
-    output += `${colors.brightBlue}🧠  WHAT HAPPENED${colors.reset}\n`;
-    output += `${colors.cyan}${this.wrapText('This error type isn\'t in our database yet. Check the error message and try to understand what went wrong.', '', maxWidth).join('\n')}${colors.reset}\n\n`;
+    output += `${colors.brightBlue}🧠 WHAT HAPPENED${colors.reset}\n`;
+    output += `${colors.cyan}This error type isn't in our database yet.${colors.reset}\n\n`;
     
-    output += `${colors.brightGreen}🔧  HOW TO FIX${colors.reset}\n`;
-    const genericFixes = [
-      'Look at the line number in the error message',
-      'Check your variable values with console.log',
-      'Search online for this specific error message',
-      'Make sure all imports and dependencies are correct'
-    ];
-    
-    genericFixes.forEach((fix, index) => {
-      const bullet = index === genericFixes.length - 1 ? '└──' : '├──';
-      output += `${colors.white}  ${bullet} ${fix}${colors.reset}\n`;
-    });
-    
-    if (this.options.showOriginalError && error.stack) {
-      output += `\n${colors.brightRed}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${colors.reset}\n`;
-      output += `${colors.dim}FULL ERROR:${colors.reset}\n`;
-      output += `${colors.white}${error.stack}${colors.reset}\n`;
-    }
-    
-    output += `${colors.brightRed}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${colors.reset}\n`;
+    output += `${colors.brightGreen}🔧 QUICK FIX:${colors.reset}\n`;
+    output += `${colors.white}  ├── Look at line number${colors.reset}\n`;
+    output += `${colors.white}  ├── Check variable values${colors.reset}\n`;
+    output += `${colors.white}  └── Search online for error${colors.reset}\n`;
     
     return output;
   }
