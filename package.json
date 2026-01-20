@@ -2,6 +2,9 @@
   "name": "error-style",
   "version": "1.0.0",
   "description": "Transform technical error messages into human-friendly explanations for better debugging",
+  "bin": {
+    "error-style": "./dist/cli/index.js"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",

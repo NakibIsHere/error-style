@@ -1,5 +1,6 @@
 export type { ErrorExplanation, PrettyTryResult } from './types/index.js';
 export type { ErrorRule, RuleMatch, ErrorContext } from './rules/types.js';
+export { getErrorCount } from './core/pretty-error.js';
 export { coreRules } from './rules/core-rules.js';
 export { RuleEngine } from './engine/rule-engine.js';
 export { PrettyFormatter, type FormatterOptions } from './formatter/pretty-formatter.js';
@@ -7,4 +8,3 @@ export { prettyTry, prettyTryAsync, formatError } from './core/index.js';
 export { setupGlobalErrorHandlers, removeGlobalErrorHandlers } from './utils/global-handlers.js';
 export { prettyError, logPrettyError, wrapWithErrorHandler } from './core/pretty-error.js';
 export { prettyFormatter } from './formatter/pretty-formatter.js';
-export declare function getErrorCount(): number;

@@ -2,7 +2,10 @@
 export type { ErrorExplanation, PrettyTryResult } from './types/index.js';
 export type { ErrorRule, RuleMatch, ErrorContext } from './rules/types.js';
 
-// Export the main classes and functions
+// Export the new getErrorCount function
+export { getErrorCount } from './core/pretty-error.js';
+
+// Export main classes and functions
 export { coreRules } from './rules/core-rules.js';
 export { RuleEngine } from './engine/rule-engine.js';
 export { PrettyFormatter, type FormatterOptions } from './formatter/pretty-formatter.js';
@@ -12,9 +15,3 @@ export { prettyError, logPrettyError, wrapWithErrorHandler } from './core/pretty
 
 // Export default instances
 export { prettyFormatter } from './formatter/pretty-formatter.js';
-
-// Export error count getter
-import { PrettyFormatter } from './formatter/pretty-formatter.js';
-export function getErrorCount(): number {
-  return PrettyFormatter.getErrorCount();
-}

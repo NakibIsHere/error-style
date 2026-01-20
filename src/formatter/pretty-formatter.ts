@@ -32,8 +32,6 @@ export class PrettyFormatter {
    * Format an error with rule matching
    */
   formatError(error: Error, ruleMatch: RuleMatch | null, context?: ErrorContext): string {
-    PrettyFormatter.errorCount++;
-    
     if (!ruleMatch) {
       return this.formatUnknownError(error, context);
     }
@@ -46,6 +44,13 @@ export class PrettyFormatter {
    */
   static getErrorCount(): number {
     return PrettyFormatter.errorCount;
+  }
+
+  /**
+   * Increment error count (for external use)
+   */
+  static incrementErrorCount(): void {
+    PrettyFormatter.errorCount++;
   }
 
   /**
@@ -209,7 +214,7 @@ export class PrettyFormatter {
   /**
    * Extract file and line info from stack trace
    */
-  private extractStackInfo(stack?: string): { file?: string; line?: string } {
+  extractStackInfo(stack?: string): { file?: string; line?: string } {
     if (!stack) return {};
     
     const lines = stack.split('\n');
