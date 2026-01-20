@@ -62,6 +62,7 @@ function main() {
   console.log(`\n📈 Total errors processed: ${getErrorCount()}`);
 }
 
-if (require.main === module) {
+// Check if this file is being run directly
+if (import.meta.url === `file://${process.argv[1]}`) {
   main();
 }
