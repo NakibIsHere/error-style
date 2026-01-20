@@ -1,4 +1,5 @@
-# error-style
+# ERROR-STYLE
+To view the package, see [npmjs.com/package/error-style](https://www.npmjs.com/package/error-style)
 
 Transform technical error messages into human-friendly explanations for better debugging.
 
