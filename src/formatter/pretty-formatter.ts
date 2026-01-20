@@ -81,10 +81,6 @@ export class PrettyFormatter {
       output += `${colors.yellow}  • Variable: "${variableName}"${colors.reset}\n`;
     }
     
-    if (context?.framework) {
-      output += `${colors.yellow}  • ${context.framework} docs${colors.reset}\n`;
-    }
-    
     return output;
   }
 
