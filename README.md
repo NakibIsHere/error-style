@@ -1,3 +1,4 @@
+![Untitled design](https://github.com/user-attachments/assets/07a8aec8-a864-4444-b519-5765d4404960)
 # ERROR-STYLE
 To view the package, see [npmjs.com/package/error-style](https://www.npmjs.com/package/error-style)
 
