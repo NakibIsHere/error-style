@@ -1,5 +1,5 @@
 {
-  "name": "error-style",
+  "name": "@slammers001/error-style",
   "version": "1.0.6",
   "description": "Transform technical error messages into human-friendly explanations for better debugging",
   "bin": {
